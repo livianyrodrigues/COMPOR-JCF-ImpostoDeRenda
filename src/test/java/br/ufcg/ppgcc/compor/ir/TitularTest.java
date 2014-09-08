@@ -3,8 +3,6 @@ package br.ufcg.ppgcc.compor.ir;
 import org.junit.Before;
 import org.junit.Test;
 
-import br.ufcg.ppgcc.compor.ir.impl.excecaoCriarTitular;
-
 
 
 public class TitularTest {
