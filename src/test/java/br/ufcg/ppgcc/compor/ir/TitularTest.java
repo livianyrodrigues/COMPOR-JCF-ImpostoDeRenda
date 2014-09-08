@@ -3,6 +3,8 @@ package br.ufcg.ppgcc.compor.ir;
 import org.junit.Before;
 import org.junit.Test;
 
+import br.ufcg.ppgcc.compor.ir.impl.ExcecaoImpostoDeRenda;
+
 
 
 public class TitularTest {
@@ -38,6 +40,7 @@ public class TitularTest {
 		Titular titular = new Titular();
 		titular.setCpf("000.000.000-00"); 
 		fachada.criarNovoTitular(titular);
+		
 	}
 
 }
