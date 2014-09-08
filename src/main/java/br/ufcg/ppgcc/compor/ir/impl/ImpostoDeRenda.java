@@ -5,6 +5,7 @@ import java.util.List;
 
 import br.ufcg.ppgcc.compor.ir.impl.excecaoCriarTitular;
 import br.ufcg.ppgcc.compor.ir.FachadaExperimento;
+import br.ufcg.ppgcc.compor.ir.FontePagadora;
 import br.ufcg.ppgcc.compor.ir.Titular;
 
 public class ImpostoDeRenda implements FachadaExperimento{
@@ -27,6 +28,16 @@ public class ImpostoDeRenda implements FachadaExperimento{
 
 	public List<Titular> listarTitulares() {
 		return titulares;
+	}
+
+	public void criarFontePagadora(Titular titular, FontePagadora fonte) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public List<FontePagadora> listarFontes(Titular titular) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
