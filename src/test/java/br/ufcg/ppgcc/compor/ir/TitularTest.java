@@ -65,6 +65,6 @@ public class TitularTest {
 		titular = new Titular();
 		titular.setNome("Jose");
 		titular.setCpf("000.000.000-00a"); 
-		TitularHelper.excecaoCriarTitular(fachada, titular, "O campo CPF está inválido");
+		TitularHelper.excecaoCriarTitular(fachada, titular,"O campo CPF está inválido");
 	}
 }
