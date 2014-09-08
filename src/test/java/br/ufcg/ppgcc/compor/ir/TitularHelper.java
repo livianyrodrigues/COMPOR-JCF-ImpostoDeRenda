@@ -4,6 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Calendar;
 import java.util.List;
+import br.ufcg.ppgcc.compor.ir.impl.excecaoCriarTitular;
+
+
+import org.junit.Assert;
 
 public class TitularHelper {
 
@@ -50,4 +54,12 @@ public class TitularHelper {
 		
 	}
 
+	static void excecaoCriarTitular(FachadaExperimento fachada, Titular titular, String mensagem) {
+		try {
+			fachada.criarNovoTitular(titular);
+			Assert.fail("A criação de Titular deveria ter lançado exceção");
+		} catch (excecaoCriarTitular e) {
+			Assert.assertEquals(e.getMessage(), mensagem);
+		}
+	}
 }
