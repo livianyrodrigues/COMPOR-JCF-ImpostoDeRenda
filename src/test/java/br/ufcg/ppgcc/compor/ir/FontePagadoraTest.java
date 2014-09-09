@@ -43,4 +43,5 @@ public class FontePagadoraTest {
 		FontePagadoraHelper.verificaCriacaoFontes(fachada, titular2, fonte2);
 	}
 
+
 }

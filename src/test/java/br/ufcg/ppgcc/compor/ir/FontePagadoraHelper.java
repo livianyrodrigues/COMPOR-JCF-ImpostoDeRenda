@@ -37,9 +37,5 @@ public class FontePagadoraHelper {
 		
 	}
 
-	public static FontePagadora criarFontePagadoraPadrao2() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	
 }
