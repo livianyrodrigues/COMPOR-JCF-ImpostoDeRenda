@@ -9,6 +9,7 @@ import br.ufcg.ppgcc.compor.ir.impl.excecaoCriarTitular;
 import br.ufcg.ppgcc.compor.ir.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.FontePagadora;
 import br.ufcg.ppgcc.compor.ir.Titular;
+import br.ufcg.ppgcc.compor.ir.impl.excecaoCriarFonte;
 
 public class ImpostoDeRenda implements FachadaExperimento{
 
@@ -34,16 +35,23 @@ public class ImpostoDeRenda implements FachadaExperimento{
 	}
 
 	public void criarFontePagadora(Titular titular, FontePagadora fonte) {
+		if (fonte.getNome() == null) {
+			throw new excecaoCriarFonte("O campo nome é obrigatório");
+		}else if (fonte.getRendimentoRecebidos() == 0.0) {
+			throw new excecaoCriarFonte("O campo rendimentos recebidos é obrigatório");
+		}else if (fonte.getRendimentoRecebidos() < 0.0) {
+			throw new excecaoCriarFonte("O campo rendimentos recebidos deve ser maior que zero");
+		}else if (fonte.getCpfCnpj() == null) {
+			throw new excecaoCriarFonte("O campo CPF/CNPJ é obrigatório");
+		}else if (!fonte.getCpfCnpj().matches("[\\d]{2}\\.[\\d]{3}\\.[\\d]{3}\\/[\\d]{4}\\-[\\d]{2}")) {
+			throw new ExcecaoImpostoDeRenda("O campo CPF é obrigatório");
+				}
 		ArrayList<FontePagadora> fontesDoTitular = (ArrayList<FontePagadora>) titulares.get(titular);
 			fontesDoTitular.add(fonte);
 		}
 
-
 	public List<FontePagadora> listarFontes(Titular titular) {
 		return new ArrayList<FontePagadora>(titulares.get(titular));
 	}
-
-	
-	
 }
 

@@ -2,7 +2,10 @@ package br.ufcg.ppgcc.compor.ir;
 
 import static org.junit.Assert.assertEquals;
 
+
 import java.util.List;
+
+import org.junit.Assert;
 
 public class FontePagadoraHelper {
 
@@ -37,5 +40,12 @@ public class FontePagadoraHelper {
 		
 	}
 
-	
+	static void excecaoCriarFonte(FachadaExperimento fachada, Titular titular, FontePagadora fonte, String mensagem) {
+		try {
+			fachada.criarFontePagadora(titular, fonte);
+			Assert.fail("A criação de Fonte pagadora deveria ter lançado exceção");
+		} catch (br.ufcg.ppgcc.compor.ir.impl.excecaoCriarFonte e) {
+			Assert.assertEquals(e.getMessage(), mensagem);
+		}
+	}
 }
