@@ -77,7 +77,6 @@ public class FontePagadoraTest {
 	public void T_02_06_novaFonteComTitularDesconhecido() {
 		Titular titular = TitularHelper.criarTitularPadrao();
 		FontePagadora fonte = FontePagadoraHelper.criarFontePagadoraPadrao1();
-		FontePagadoraHelper.excecaoCriarFonte(fachada, titular, fonte,
-				"Titular não cadastrado");
+		FontePagadoraHelper.excecaoCriarFonte(fachada, titular, fonte,"Titular não cadastrado");
 	}
 }

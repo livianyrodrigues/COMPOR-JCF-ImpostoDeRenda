@@ -18,7 +18,6 @@ public class ImpostoDeRenda implements FachadaExperimento{
 		
 	public void criarNovoTitular(Titular titular){
 		
-			
 		if(titular.getNome() == null ){
 			throw new excecaoCriarTitular("O campo nome é obrigatório");
 		}else if(titular.getCpf() == null){
@@ -27,6 +26,7 @@ public class ImpostoDeRenda implements FachadaExperimento{
 		}else if(titular.getCpf().length() != 14 ){
 			throw new excecaoCriarTitular("O campo CPF está inválido");
 		}
+		
 		titulares.put(titular, new ArrayList<FontePagadora>());
 	}
 
@@ -45,6 +45,8 @@ public class ImpostoDeRenda implements FachadaExperimento{
 			throw new excecaoCriarFonte("O campo CPF/CNPJ é obrigatório");
 		}else if (!fonte.getCpfCnpj().matches("[\\d]{2}\\.[\\d]{3}\\.[\\d]{3}\\/[\\d]{4}\\-[\\d]{2}")) {
 			throw new excecaoCriarFonte("O campo CPF/CNPJ é inválido");
+		}else if (titulares.size()== 0){
+			throw new excecaoCriarFonte("Titular não cadastrado");
 		}
 		ArrayList<FontePagadora> fontesDoTitular = (ArrayList<FontePagadora>) titulares.get(titular);
 			fontesDoTitular.add(fonte);
