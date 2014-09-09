@@ -72,4 +72,12 @@ public class FontePagadoraTest {
 		fonte = FontePagadoraHelper.criarFontePagadora("UFCG","00.000.000/0000-00a", 50000);
 		FontePagadoraHelper.excecaoCriarFonte(fachada, titular, fonte,"O campo CPF/CNPJ é inválido");
 	}
+	
+	@Test
+	public void T_02_06_novaFonteComTitularDesconhecido() {
+		Titular titular = TitularHelper.criarTitularPadrao();
+		FontePagadora fonte = FontePagadoraHelper.criarFontePagadoraPadrao1();
+		FontePagadoraHelper.excecaoCriarFonte(fachada, titular, fonte,
+				"Titular não cadastrado");
+	}
 }
