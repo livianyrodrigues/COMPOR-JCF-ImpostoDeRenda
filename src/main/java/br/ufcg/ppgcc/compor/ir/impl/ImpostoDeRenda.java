@@ -11,6 +11,7 @@ import br.ufcg.ppgcc.compor.ir.Titular;
 public class ImpostoDeRenda implements FachadaExperimento{
 
 	List<Titular> titulares = new ArrayList<Titular>();
+	List<FontePagadora>  fontesSalvas = new ArrayList<FontePagadora>();
 	
 	public void criarNovoTitular(Titular titular){
 		
@@ -31,13 +32,13 @@ public class ImpostoDeRenda implements FachadaExperimento{
 	}
 
 	public void criarFontePagadora(Titular titular, FontePagadora fonte) {
-		// TODO Auto-generated method stub
+		fontesSalvas.add(fonte);
 		
 	}
 
 	public List<FontePagadora> listarFontes(Titular titular) {
 		// TODO Auto-generated method stub
-		return null;
+		return fontesSalvas;
 	}
 
 }
