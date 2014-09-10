@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import br.ufcg.ppgcc.compor.ir.impl.excecaoCriarTitular;
+import br.ufcg.ppgcc.compor.ir.Dependente;
 import br.ufcg.ppgcc.compor.ir.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.FontePagadora;
 import br.ufcg.ppgcc.compor.ir.Titular;
@@ -14,7 +15,7 @@ import br.ufcg.ppgcc.compor.ir.impl.excecaoCriarFonte;
 public class ImpostoDeRenda implements FachadaExperimento{
 
 	private Map<Titular, List<FontePagadora>> titulares = new LinkedHashMap<Titular, List<FontePagadora>>();
-
+	private Map<Titular, List<Dependente>> titDependente = new LinkedHashMap<Titular, List<Dependente>>();
 		
 	public void criarNovoTitular(Titular titular){
 		
@@ -54,6 +55,20 @@ public class ImpostoDeRenda implements FachadaExperimento{
 
 	public List<FontePagadora> listarFontes(Titular titular) {
 		return new ArrayList<FontePagadora>(titulares.get(titular));
+	}
+
+	public List<Dependente> listarDependentes(Titular titular) {
+		// T.03.03
+		return new ArrayList<Dependente> (titDependente.get(titular));
+	}
+
+	public void criarDependente(Titular titular, Dependente dependente) {
+		//T.03.03
+		if(titDependente.containsKey(titular)){
+			List<Dependente> listDependente = titDependente.get(titular);
+			listDependente.add(dependente);
+			titDependente.put(titular, listDependente);
+		}
 	}
 }
 
