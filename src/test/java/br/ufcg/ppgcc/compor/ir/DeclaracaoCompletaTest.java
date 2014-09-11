@@ -25,7 +25,7 @@ public class DeclaracaoCompletaTest {
 		cadastrarCalcularImpostoDevido(0, titular2, 19000);
 
 		Titular titular3 = TitularHelper.criarTitularPadrao2();
-		cadastrarCalcularImpostoDevido(0, titular3, 5000, 10000);
+		novocadastrarCalcularImpostoDevido(0, titular3, 5000, 10000);
 	}
 
 	@Test
@@ -37,7 +37,7 @@ public class DeclaracaoCompletaTest {
 		cadastrarCalcularImpostoDevido(401.6, titular2, 25000);
 
 		Titular titular3 = TitularHelper.criarTitularPadrao2();
-		cadastrarCalcularImpostoDevido(701.6, titular3, 15000, 14000);
+		novocadastrarCalcularImpostoDevido(701.6, titular3, 15000, 14000);
 	}
 
 	@Test
@@ -49,7 +49,7 @@ public class DeclaracaoCompletaTest {
 		cadastrarCalcularImpostoDevido(1568.45, titular2, 35000);
 
 		Titular titular3 = TitularHelper.criarTitularPadrao2();
-		cadastrarCalcularImpostoDevido(2168.45, titular3, 15000, 24000);
+		novocadastrarCalcularImpostoDevido(2168.45, titular3, 15000, 24000);
 	}
 
 	@Test
@@ -61,7 +61,7 @@ public class DeclaracaoCompletaTest {
 		cadastrarCalcularImpostoDevido(3499.21, titular2, 45000);
 
 		Titular titular3 = TitularHelper.criarTitularPadrao2();
-		cadastrarCalcularImpostoDevido(4399.21, titular3, 15000, 34000);
+		novocadastrarCalcularImpostoDevido(4399.21, titular3, 15000, 34000);
 	}
 
 	@Test
@@ -73,7 +73,7 @@ public class DeclaracaoCompletaTest {
 		cadastrarCalcularImpostoDevido(18421.62, titular2, 100000);
 
 		Titular titular3 = TitularHelper.criarTitularPadrao2();
-		cadastrarCalcularImpostoDevido(265921.62, titular3, 300000, 500000,
+		novocadastrarCalcularImpostoDevido(265921.62, titular3, 300000, 500000,
 				200000);
 
 	}
@@ -87,7 +87,7 @@ public class DeclaracaoCompletaTest {
 		//TODO calcular com todas as faixas e com vários dependentes
 	}
 
-	private void cadastrarCalcularImpostoDevido(double impostoDevido,
+	private void novocadastrarCalcularImpostoDevido(double impostoDevido,
 			Titular titular, int... rendas) {
 
 		fachada.criarNovoTitular(titular);
