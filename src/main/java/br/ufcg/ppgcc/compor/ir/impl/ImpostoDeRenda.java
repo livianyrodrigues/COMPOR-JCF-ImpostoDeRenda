@@ -10,13 +10,15 @@ import br.ufcg.ppgcc.compor.ir.impl.excecaoCriarTitular;
 import br.ufcg.ppgcc.compor.ir.Dependente;
 import br.ufcg.ppgcc.compor.ir.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.FontePagadora;
+import br.ufcg.ppgcc.compor.ir.Resultado;
 import br.ufcg.ppgcc.compor.ir.Titular;
 import br.ufcg.ppgcc.compor.ir.impl.excecaoCriarFonte;
 
 public class ImpostoDeRenda implements FachadaExperimento{
-
+		
 	private Map<Titular, List<FontePagadora>> titulares = new LinkedHashMap<Titular, List<FontePagadora>>();
 	private Map<Titular, List<Dependente>> dependentes = new HashMap<Titular, List<Dependente>>();
+	private Resultado resultado = new Resultado();
 		
 	public void criarNovoTitular(Titular titular){
 		
@@ -88,6 +90,11 @@ public class ImpostoDeRenda implements FachadaExperimento{
 		
 	public List<Dependente> listarDependentes(Titular titular) {
 		return dependentes.get(titular);
+	}
+
+	public Resultado declaracaoCompleta(Titular titular) {
+		return resultado;
+		
 	}
 	}
 
