@@ -8,7 +8,9 @@ import br.ufcg.ppgcc.compor.ir.Dependente;
 import br.ufcg.ppgcc.compor.ir.FachadaExperimento;
 import br.ufcg.ppgcc.compor.ir.Resultado;
 import br.ufcg.ppgcc.compor.ir.Titular;
-import br.ufcg.ppgcc.compor.ir.ExcecaoImpostoDeRenda;
+import br.ufcg.ppgcc.compor.ir.impl.excecaoCriarDependente;
+import br.ufcg.ppgcc.compor.ir.impl.excecaoCriarFonte;
+import br.ufcg.ppgcc.compor.ir.impl.excecaoCriarTitular;
 
 import java.util.Map;
 import java.util.LinkedHashMap;
@@ -22,15 +24,15 @@ public class ImpostoDeRenda implements FachadaExperimento {
 
 	public void criarNovoTitular(Titular titular) {
 		if (titular.getNome() == null) {
-			throw new ExcecaoImpostoDeRenda("O campo nome é obrigatório");
+			throw new excecaoCriarTitular("O campo nome é obrigatório");
 		}
 
 		if (titular.getCpf() == null) {
-			throw new ExcecaoImpostoDeRenda("O campo CPF é obrigatório");
+			throw new excecaoCriarTitular("O campo CPF é obrigatório");
 		}
 
 		if (titular.getCpf().matches("\\d\\d\\d.\\d\\d\\d.\\d\\d\\d-\\d\\d") == false) {
-			throw new ExcecaoImpostoDeRenda("O campo CPF está inválido");
+			throw new excecaoCriarTitular("O campo CPF está inválido");
 		}
 
 		titulares.put(titular, new ArrayList<FontePagadora>());
@@ -42,33 +44,33 @@ public class ImpostoDeRenda implements FachadaExperimento {
 	}
 
 	public void criarFontePagadora(Titular titular, FontePagadora fonte) {
-		// Verifica se o nome da fonte é nulo
+	
 		if (fonte.getNome() == null) {
-			throw new ExcecaoImpostoDeRenda("O campo nome é obrigatório");
+			throw new excecaoCriarFonte("O campo nome é obrigatório");
 		}
-		// verifica se o rendimento é zero
+
 		if (fonte.getRendimentoRecebidos() == 0.0) {
-			throw new ExcecaoImpostoDeRenda(
+			throw new excecaoCriarFonte(
 					"O campo rendimentos recebidos é obrigatório");
 		}
-		// verifica se rendimento é menor que zero
+	
 		if (fonte.getRendimentoRecebidos() < 0.0) {
-			throw new ExcecaoImpostoDeRenda(
+			throw new excecaoCriarFonte(
 					"O campo rendimentos recebidos deve ser maior que zero");
 		}
 
-		// verifica se o cpf/cnpj é válido
+
 		if (fonte.getCpfCnpj() == null) {
-			throw new ExcecaoImpostoDeRenda("O campo CPF/CNPJ é obrigatório");
+			throw new excecaoCriarFonte("O campo CPF/CNPJ é obrigatório");
 		} else if (!fonte.getCpfCnpj().matches(
 				"[\\d]{2}\\.[\\d]{3}\\.[\\d]{3}\\/[\\d]{4}\\-[\\d]{2}")) {
-			throw new ExcecaoImpostoDeRenda("O campo CPF/CNPJ é inválido");
+			throw new excecaoCriarFonte("O campo CPF/CNPJ é inválido");
 		}
-		// verifica se o titulares contém titular
+	
 		if (titulares.containsKey(titular) == false) {
-			throw new ExcecaoImpostoDeRenda("Titular não cadastrado");
+			throw new excecaoCriarFonte("Titular não cadastrado");
 		}
-		// adiciona em titulares as fontes do titular
+	
 		ArrayList<FontePagadora> fontesDoTitular = (ArrayList<FontePagadora>) titulares
 				.get(titular);
 		fontesDoTitular.add(fonte);
@@ -79,52 +81,33 @@ public class ImpostoDeRenda implements FachadaExperimento {
 	}
 
 	public void criarDependente(Titular titular, Dependente dependente) {
-		// verifica se o cpf do dependente está nulo
-		verificaCPFnulo(dependente);
-		// verifica se o nome do dependente é nulo
-		verificaNOMEnulo(dependente);
-		// verifica se o tipo do dependente é igual a zero
-		verificaTIPOnulo(dependente);
-		// verifica se o CPF é válido
-		verificaVALIDACAOcpf(dependente);
-		// verifica se o tipo é inválido
-		if (dependente.getTipo() <= 0) {
-			throw new ExcecaoImpostoDeRenda("O campo tipo é inválido");
+	
+		if (dependente.getTipo() < 0) {
+			throw new excecaoCriarDependente("O campo tipo é inválido");
+			
+		}else if (dependente.getCpf().matches("\\d\\d\\d.\\d\\d\\d.\\d\\d\\d-\\d\\d") == false) {
+			throw new excecaoCriarDependente("O campo CPF é inválido");
+			
+		}else if (dependente.getTipo() == 0) {
+			throw new excecaoCriarDependente("O campo tipo é obrigatório");
+			
 		}
-		// verifica se o titular foi cadastrado
-		if (dependentes.containsKey(titular) == false) {
-			throw new ExcecaoImpostoDeRenda("Titular não cadastrado");
+		else if (dependente.getNome() == null) {
+			throw new excecaoCriarDependente("O campo nome é obrigatório");
+			
+		}else if (dependente.getCpf() == null) {
+			throw new excecaoCriarDependente("O campo CPF é obrigatório");
+			
+		}if (dependentes.containsKey(titular)) {
+			ArrayList<Dependente> dependentesDoTitular = (ArrayList<Dependente>) dependentes.get(titular);
+			dependentesDoTitular.add(dependente);
+			dependentes.put(titular, dependentesDoTitular);
 		}
-		// não sei o que isso faz foi criado junto com eclipse
-		if (dependentes.containsKey(titular)) {
-			List<Dependente> listaDeDependentes = dependentes.get(titular);
-			listaDeDependentes.add(dependente);
+		
+		if (dependentes.size()== 0 ){
+			throw new excecaoCriarDependente("Titular não cadastrado");
 		}
-
-	}
-
-	private void verificaVALIDACAOcpf(Dependente dependente) {
-		if (dependente.getCpf().matches("\\d\\d\\d.\\d\\d\\d.\\d\\d\\d-\\d\\d") == false) {
-			throw new ExcecaoImpostoDeRenda("O campo CPF é inválido");
-		}
-	}
-
-	private void verificaTIPOnulo(Dependente dependente) {
-		if (dependente.getTipo() == 0) {
-			throw new ExcecaoImpostoDeRenda("O campo tipo é obrigatório");
-		}
-	}
-
-	private void verificaNOMEnulo(Dependente dependente) {
-		if (dependente.getNome() == null) {
-			throw new ExcecaoImpostoDeRenda("O campo nome é obrigatório");
-		}
-	}
-
-	private void verificaCPFnulo(Dependente dependente) {
-		if (dependente.getCpf() == null) {
-			throw new ExcecaoImpostoDeRenda("O campo CPF é obrigatório");
-		}
+		
 	}
 
 	public List<Dependente> listarDependentes(Titular titular) {
@@ -132,7 +115,7 @@ public class ImpostoDeRenda implements FachadaExperimento {
 	}
 
 	public Resultado declaracaoCompleta(Titular titular) {
-		// armaria que função pra dar trabalho
+		
 		double aliquota = 0;
 		double parcelaDeDeducao = 0;
 		double impostoDevido = 0;
@@ -160,10 +143,7 @@ public class ImpostoDeRenda implements FachadaExperimento {
 			aliquota = 27.5 / 100;
 			parcelaDeDeducao = 9078.38;
 		}
-		// o certo seria essa proporção aumentar de acordo com a grana dos
-		// marajás
-		// a carga tributária fica toda pro proletáriado, que paga imposto até
-		// pra respirar.
+		
 		impostoDevido = (somatorioDeRendimentos * aliquota) - parcelaDeDeducao;
 		resultado.setImpostoDevido(impostoDevido);
 		resultado.setImpostoDevido(this.calcularImpostoDevido(titular));
