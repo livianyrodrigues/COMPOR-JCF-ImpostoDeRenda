@@ -4,6 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Calendar;
 import java.util.List;
+import br.ufcg.ppgcc.compor.ir.impl.excecaoCriarDependente;
+
 
 import org.junit.Assert;
 
@@ -42,10 +44,10 @@ public class DependenteHelper {
 	}
 
 	static void excecaoCriarDependente(FachadaExperimento fachada, Titular titular, Dependente dependente, String mensagem) {
-		try {
-			fachada.criarDependente(titular, dependente);
-			Assert.fail("A criação de dependente deveria ter lançado exceção");
-		} catch (ExcecaoImpostoDeRenda e) {
+ 		try {
+ 			fachada.criarDependente(titular, dependente);
+ 			Assert.fail("A criação de dependente deveria ter lançado exceção");
+	} catch (excecaoCriarDependente e) {
 			Assert.assertEquals(e.getMessage(), mensagem);
 		}
 	}

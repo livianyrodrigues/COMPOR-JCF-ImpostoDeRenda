@@ -81,24 +81,23 @@ public class DependenteTest {
 		Dependente dependente = 
 				DependenteHelper.criarDependente("000000000000", Calendar.getInstance(), "Filho 1", 21);
 		DependenteHelper.excecaoCriarDependente(fachada, titular,
-				dependente, "O campo CPF é inválido");
+				dependente,"O campo CPF é inválido");
 		
 		dependente = 
 				DependenteHelper.criarDependente("abc", Calendar.getInstance(), "Filho 1", 21);
 		DependenteHelper.excecaoCriarDependente(fachada, titular,
-				dependente, "O campo CPF é inválido");
+				dependente,"O campo CPF é inválido");
 
 		dependente = 
 				DependenteHelper.criarDependente("000.000.000.00a", Calendar.getInstance(), "Filho 1", 21);
 		DependenteHelper.excecaoCriarDependente(fachada, titular,
-				dependente, "O campo CPF é inválido");
+				dependente,"O campo CPF é inválido");
 	}
 
 	@Test
 	public void T_03_06_novoDependenteComTitularDesconhecido() {
 		Titular titular = TitularHelper.criarTitularPadrao();
 		Dependente dependente = DependenteHelper.criarDependentePadrao1();
-		DependenteHelper.excecaoCriarDependente(fachada, titular, dependente,
-				"Titular não cadastrado");
+		DependenteHelper.excecaoCriarDependente(fachada, titular, dependente,"Titular não cadastrado");
 	}
 }
